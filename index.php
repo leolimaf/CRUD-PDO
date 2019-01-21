@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/res/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="/res/favicon.ico">
 </head>
 <body>
     <div class="container">
@@ -18,14 +18,10 @@
             <div class="col-md-6">
                 <h1>PHP - CRUD</h1>
                 <small>Por: Leonardo Lima</small><hr>
-                <form action="" method="POST">
+                <form action="processaDados.php" method="POST">
                     <div class="form-group">
                         <label class="control-label">Nome:</label>
                         <input type="text" name="nome" class="form-control" maxlength="70">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Email:</label>
-                        <input type="email" name="email" class="form-control" maxlength="70">
                     </div>
                     <div class="form-group">
                         <label class="control-label">Senha:</label>
@@ -40,14 +36,30 @@
                 <table class="table">
                     <thead class="thead-light">
                         <tr>
+                            <th scope="col">Id</th>
                             <th scope="col">Nome</th>
-                            <th scope="col">Email</th>
                             <th scope="col">Senha</th>
                             <th scope="col">Opções</th>
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        <?php
+                            $conn = new PDO("mysql:dbname=db_CRUD;host=localhost", "root", "");
+                            $stmt = $conn->prepare("SELECT * FROM tb_dados");
+                            $stmt->execute();
+                            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            foreach($results as $row){
+                                echo "<tr>";
+                                foreach($row as $value){
+                                    echo "<td>$value</td>";
+                                }
+                                echo "<td>
+                                        <button type='button' class='btn btn-info'>Editar</button>
+                                        <button type='button' class='btn btn-danger'>Deletar</button>
+                                    </td>
+                                </tr>";
+                            }
+                        ?>
                     </tbody>
                 </table>
             </div>

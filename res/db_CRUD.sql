@@ -1,0 +1,11 @@
+CREATE DATABASE db_CRUD;
+
+USE db_CRUD;
+
+CREATE TABLE tb_dados(
+	idusuario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    desnome VARCHAR(80) NOT NULL,
+    dessenha VARCHAR(120) NOT NULL
+);
+
+SELECT * FROM tb_dados;

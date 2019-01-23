@@ -10,3 +10,12 @@ if (isset($_POST['cadastrar']) && !empty($_POST['nome']) && !empty($_POST['senha
 
     $stmt->execute();
 }
+
+if (isset($_GET['deletar'])) {
+
+    $stmt = $conn->prepare("DELETE FROM tb_dados WHERE idusuario = :ID");
+
+    $stmt->bindParam(":ID", $_GET['deletar']);
+
+    $stmt->execute();
+}

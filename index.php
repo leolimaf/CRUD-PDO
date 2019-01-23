@@ -54,8 +54,8 @@
                                     echo "<td>$value</td>";
                                 }
                                 echo "<td>
-                                        <button type='button' class='btn btn-info'>Editar</button>
-                                        <button type='button' class='btn btn-danger'>Deletar</button>
+                                        <a class='btn btn-info'>Editar</a>
+                                        <a href='processaDados.php?deletar=$row[idusuario]' class='btn btn-danger'>Deletar</a>
                                     </td>
                                 </tr>";
                             }

@@ -13,6 +13,7 @@
     <link rel="shortcut icon" href="/res/favicon.ico">
 </head>
 <body>
+    <?php require_once "processaDados.php" ?>
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -27,6 +28,12 @@
                         <label class="control-label">Senha:</label>
                         <input type="password" name="senha" class="form-control" maxlength="25">
                     </div>
+                    <?php
+                        if (isset($_SESSION['mensagem']) && $_SESSION['msg_tipo'] === "success") {
+                            echo "<div class='alert alert-success text-center'>$_SESSION[mensagem]</div>";
+                            unset($_SESSION['mensagem']);
+                        }
+                    ?>
                     <div class="form-group text-center">
                         <input type="submit" name="cadastrar" class="btn btn-primary" value="Cadastrar">
                     </div>
@@ -62,6 +69,12 @@
                         ?>
                     </tbody>
                 </table>
+                <?php
+                    if (isset($_SESSION['mensagem']) && $_SESSION['msg_tipo'] === "danger") {
+                        echo "<div class='alert alert-danger text-center'>$_SESSION[mensagem]</div>";
+                        unset($_SESSION['mensagem']);
+                    } //continuar com a parte de edição aqui
+                ?>
             </div>
         </div>
     </div>

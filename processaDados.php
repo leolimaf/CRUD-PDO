@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $conn = new PDO("mysql:dbname=db_CRUD;host=localhost", "root", "");
 
 if (isset($_POST['cadastrar']) && !empty($_POST['nome']) && !empty($_POST['senha'])) {
@@ -9,6 +11,11 @@ if (isset($_POST['cadastrar']) && !empty($_POST['nome']) && !empty($_POST['senha
     $stmt->bindParam(":PASSWORD", $_POST['senha']);
 
     $stmt->execute();
+
+    $_SESSION['mensagem'] = "Usuário cadastrado com sucesso!";
+    $_SESSION['msg_tipo'] = "success";
+
+    header("location: index.php");
 }
 
 if (isset($_GET['deletar'])) {
@@ -18,4 +25,9 @@ if (isset($_GET['deletar'])) {
     $stmt->bindParam(":ID", $_GET['deletar']);
 
     $stmt->execute();
+
+    $_SESSION['mensagem'] = "Usuário removido com sucesso!";
+    $_SESSION['msg_tipo'] = "danger";
+
+    header("location: index.php");
 }

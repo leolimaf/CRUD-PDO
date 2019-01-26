@@ -20,23 +20,38 @@
                 <h1>PHP - CRUD</h1>
                 <small>Por: Leonardo Lima</small><hr>
                 <form action="processaDados.php" method="POST">
+                    <input type="hidden" name="id" value="<?php echo $id; ?>">
                     <div class="form-group">
                         <label class="control-label">Nome:</label>
-                        <input type="text" name="nome" class="form-control" maxlength="70">
+                        <input type="text" name="nome" class="form-control" value="<?php echo $nome; ?>" maxlength="70">
                     </div>
                     <div class="form-group">
                         <label class="control-label">Senha:</label>
-                        <input type="password" name="senha" class="form-control" maxlength="25">
+                        <input type="password" name="senha" class="form-control" value="<?php echo $senha; ?>" maxlength="25">
                     </div>
                     <?php
+                        //Informa se foi cadastrado
                         if (isset($_SESSION['mensagem']) && $_SESSION['msg_tipo'] === "success") {
                             echo "<div class='alert alert-success text-center'>$_SESSION[mensagem]</div>";
                             unset($_SESSION['mensagem']);
+                        } 
+                        //Informa se os dados do usuário foram alterados
+                        elseif (isset($_SESSION['mensagem']) && $_SESSION['msg_tipo'] === "update") {
+                            echo "<div class='alert alert-info text-center'>$_SESSION[mensagem]</div>";
+                            unset($_SESSION['mensagem']);
                         }
+                        //Mostra se deve cadastra ou editar
+                        if ($update === true) {
+                            echo "<div class='form-group text-center'>
+                                    <input type='submit' name='editar' class='btn btn-info' value='Editar'>
+                        </div>";
+                        } else{
+                            echo "<div class='form-group text-center'>
+                            <input type='submit' name='cadastrar' class='btn btn-primary' value='Cadastrar'>
+                        </div>";
+                        }       
+
                     ?>
-                    <div class="form-group text-center">
-                        <input type="submit" name="cadastrar" class="btn btn-primary" value="Cadastrar">
-                    </div>
                 </form>
             </div>
             <div class="col-md-6">
@@ -51,7 +66,7 @@
                     </thead>
                     <tbody>
                         <?php
-                            $conn = new PDO("mysql:dbname=db_CRUD;host=localhost", "root", "");
+                            //Exibe os usuários cadastrados no banco
                             $stmt = $conn->prepare("SELECT * FROM tb_dados");
                             $stmt->execute();
                             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -61,8 +76,8 @@
                                     echo "<td>$value</td>";
                                 }
                                 echo "<td>
-                                        <a class='btn btn-info'>Editar</a>
-                                        <a href='processaDados.php?deletar=$row[idusuario]' class='btn btn-danger'>Deletar</a>
+                                        <a class='btn btn-info' href='?editar=$row[idusuario]'>Editar</a>
+                                        <a class='btn btn-danger' href='processaDados.php?deletar=$row[idusuario]'>Deletar</a>
                                     </td>
                                 </tr>";
                             }
@@ -70,10 +85,11 @@
                     </tbody>
                 </table>
                 <?php
+                    //Informa se o usuário foi removido
                     if (isset($_SESSION['mensagem']) && $_SESSION['msg_tipo'] === "danger") {
                         echo "<div class='alert alert-danger text-center'>$_SESSION[mensagem]</div>";
                         unset($_SESSION['mensagem']);
-                    } //continuar com a parte de edição aqui
+                    }
                 ?>
             </div>
         </div>

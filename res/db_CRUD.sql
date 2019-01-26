@@ -9,3 +9,5 @@ CREATE TABLE tb_dados(
 );
 
 SELECT * FROM tb_dados;
+
+TRUNCATE TABLE tb_dados;

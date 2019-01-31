@@ -55,42 +55,44 @@
                 </form>
             </div>
             <div class="col-md-6">
-                <table class="table">
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Senha</th>
-                            <th scope="col">Opções</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            //Exibe os usuários cadastrados no banco
-                            $stmt = $conn->prepare("SELECT * FROM tb_dados");
-                            $stmt->execute();
-                            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                            foreach($results as $row){
-                                echo "<tr>";
-                                foreach($row as $value){
-                                    echo "<td>$value</td>";
+                <div class="scroll">
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Senha</th>
+                                <th scope="col">Opções</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                //Exibe os usuários cadastrados no banco
+                                $stmt = $conn->prepare("SELECT * FROM tb_dados");
+                                $stmt->execute();
+                                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                foreach($results as $row){
+                                    echo "<tr>";
+                                    foreach($row as $value){
+                                        echo "<td>$value</td>";
+                                    }
+                                    echo "<td>
+                                            <a class='btn btn-info' href='?editar=$row[idusuario]'>Editar</a>
+                                            <a class='btn btn-danger' href='processaDados.php?deletar=$row[idusuario]'>Deletar</a>
+                                        </td>
+                                    </tr>";
                                 }
-                                echo "<td>
-                                        <a class='btn btn-info' href='?editar=$row[idusuario]'>Editar</a>
-                                        <a class='btn btn-danger' href='processaDados.php?deletar=$row[idusuario]'>Deletar</a>
-                                    </td>
-                                </tr>";
-                            }
-                        ?>
-                    </tbody>
-                </table>
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
                 <?php
                     //Informa se o usuário foi removido
                     if (isset($_SESSION['mensagem']) && $_SESSION['msg_tipo'] === "danger") {
                         echo "<div class='alert alert-danger text-center'>$_SESSION[mensagem]</div>";
                         unset($_SESSION['mensagem']);
                     }
-                ?>
+                ?>                
             </div>
         </div>
     </div>

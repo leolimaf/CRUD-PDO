@@ -26,7 +26,7 @@ form label{
     font-size: 26px;
 }
 form .form-group:last-child{
-    margin-top: 40px;
+    margin-top: 20px;
 }
 form input[type='submit']{
     font-family: 'Source Sans Pro', sans-serif;
@@ -34,11 +34,24 @@ form input[type='submit']{
     letter-spacing: .5px;
     padding: 10px 16px;
 }
+.scroll{
+    overflow-y: scroll;
+    max-height: 570px;
+}
+.scroll::-webkit-scrollbar {
+    width: 7px;
+}
+.scroll::-webkit-scrollbar-thumb {
+    background: #DAD7D7;
+}
+.alert-danger{
+    margin-top: 10px;
+}
 /*SEÇÃO DE DADOS CONTIDOS NO DB
 -----------------------*/
 table{
     border: 1px solid #dee2e6;
-    overflow-y: scroll;/*ajustar scroll futuramente*/
+    margin-bottom: 0 !important;
 }
 table thead{
     font-size: 17px;

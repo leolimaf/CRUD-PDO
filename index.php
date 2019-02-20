@@ -7,7 +7,7 @@
     <meta name="description" content="CRUD simples em PHP com PHP Data Objects">
     <title>PHP - CRUD</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet" href="/res/css/style.css">
+    <link rel="stylesheet" href="res/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
     <link rel="shortcut icon" href="/res/favicon.ico">
@@ -40,7 +40,7 @@
                             echo "<div class='alert alert-info text-center'>$_SESSION[mensagem]</div>";
                             unset($_SESSION['mensagem']);
                         }
-                        //Mostra se deve cadastra ou editar
+                        //Mostra se deve cadastrar ou editar
                         if ($update === true) {
                             echo "<div class='form-group text-center'>
                                     <input type='submit' name='editar' class='btn btn-info' value='Editar'>

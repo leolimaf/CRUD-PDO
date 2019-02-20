@@ -1,7 +1,15 @@
 <?php
 session_start();
 
-$conn = new PDO("mysql:dbname=db_CRUD;host=localhost", "root", "");
+try 
+{
+    $conn = new PDO("mysql:dbname=db_CRUD;host=localhost", "root", "");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} 
+catch (PDOException $erro) 
+{
+    $mensagem = $erro->getMessage();
+}
 
 $id = 0;
 $nome = '';

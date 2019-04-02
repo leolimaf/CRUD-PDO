@@ -16,6 +16,16 @@ $nome = '';
 $senha = '';
 $update = false;
 
+if(isset($_POST['cadastrar'])) {
+    if((empty($_POST['nome']) || empty($_POST['senha']))){
+
+        $_SESSION['mensagem'] = "Os campos acima devem ser preenchidos corretamente!";
+        $_SESSION['msg_tipo'] = "warning";
+
+        header("location: index.php");
+    }
+}
+
 
 if (isset($_POST['cadastrar']) && !empty($_POST['nome']) && !empty($_POST['senha'])) {
 

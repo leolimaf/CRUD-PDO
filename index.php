@@ -34,7 +34,11 @@
                         if (isset($_SESSION['mensagem']) && $_SESSION['msg_tipo'] === "success") {
                             echo "<div class='alert alert-success text-center'>$_SESSION[mensagem]</div>";
                             unset($_SESSION['mensagem']);
-                        } 
+                        }
+                        elseif(isset($_SESSION['mensagem']) && $_SESSION['msg_tipo'] === "warning"){
+                            echo "<div class='alert alert-warning text-center'>$_SESSION[mensagem]</div>";
+                            unset($_SESSION['mensagem']);
+                        }
                         //Informa se os dados do usuário foram alterados
                         elseif (isset($_SESSION['mensagem']) && $_SESSION['msg_tipo'] === "update") {
                             echo "<div class='alert alert-info text-center'>$_SESSION[mensagem]</div>";
